@@ -42,14 +42,20 @@ def main():
         st.write(f"Executable command: `{' '.join(cmd)}`")
 
         if st.button("Run Command", type="primary", icon="▶️"):
-            proc = subprocess.run(
-                cmd,
-                cwd=PROJECT_ROOT,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                shell=True
-            )
+            with st.spinner("Running command..."):
+                # Ensure the command is run in the project root directory
+                if os.name == "nt":
+                    cmd = " ".join(cmd)
+                else:
+                    cmd = " ".join([str(c) for c in cmd])
+                proc = subprocess.run(
+                    cmd,
+                    cwd=PROJECT_ROOT,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    shell=True
+                )
 
             st.write("Command Output:")
             if proc.stdout:

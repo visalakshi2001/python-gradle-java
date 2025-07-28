@@ -2,6 +2,7 @@ import streamlit as st
 import subprocess
 import os
 import sys
+import stat
 from pathlib import Path
 
 st.set_page_config(
@@ -32,6 +33,10 @@ def main():
         
         for dirfile in os.listdir(PROJECT_ROOT):
             st.write(dirfile, os.access(dirfile, os.X_OK))
+            st.write(os.stat(dirfile).st_mode | 0o100) 
+            os.chmod(PROJECT_ROOT / dirfile, os.stat(PROJECT_ROOT / dirfile).st_mode | 0o100)
+            st.write(dirfile, os.access(dirfile, os.X_OK))
+            st.write("---"*10)
 
         st.write(f"OS Found: {os.name}")
         if os.name == "nt":  # Windows

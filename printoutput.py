@@ -29,12 +29,12 @@ def main():
             # On Windows it’s often simpler to run under shell so the .bat is recognized
             shell_flag = True
         else:
-            wrapper = "gradlew"
+            wrapper = "./gradlew"
             shell_flag = False
         
         select_task = st.multiselect(
             "Select Task",
-            ["clean", "build"],
+            ["clean", "build", "tasks"],
             default=["clean", "build"],
             help="Select the Gradle task to run.",
         )

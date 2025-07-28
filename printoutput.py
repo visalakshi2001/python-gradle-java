@@ -26,6 +26,11 @@ def main():
     st.write(f"{sys.executable}")
 
     if uploaded_oml:
+        
+        with open(PROJECT_ROOT / "uploaded.oml", "wb") as f:
+            f.write(uploaded_oml.getbuffer())
+            st.write(os.listdir(PROJECT_ROOT))
+
         st.write(f"OS Found: {os.name}")
         if os.name == "nt":  # Windows
             wrapper = "gradlew.bat"
@@ -46,7 +51,7 @@ def main():
             default=["clean", "build"],
             help="Select the Gradle task to run.",
         )
-        cmd = ["echo", "", "|", "sudo", "-S"] +[wrapper] + select_task
+        cmd = ["echo", "''", "|", "sudo", "-S"] +[wrapper] + select_task
         st.write(f"Executable command: `{' '.join(cmd)}`")
 
         if st.button("Run Command", type="primary", icon="▶️"):

@@ -19,17 +19,19 @@ def main():
 
     uploaded_oml = st.file_uploader(
         "Upload OML File",
-        type=["oml"],
+        type=["oml", "sh"],
         help="Upload an OML file to visualize the print output.",
     )
 
     st.write(f"{sys.executable}")
 
     if uploaded_oml:
-        
-        with open(PROJECT_ROOT / "uploaded.oml", "wb") as f:
+        filename = uploaded_oml.name
+        with open(PROJECT_ROOT / filename, "wb") as f:
             f.write(uploaded_oml.getbuffer())
-            st.write(os.listdir(PROJECT_ROOT))
+        
+        for dirfile in os.listdir(PROJECT_ROOT):
+            st.write(dirfile, os.access(dirfile, os.X_OK))
 
         st.write(f"OS Found: {os.name}")
         if os.name == "nt":  # Windows

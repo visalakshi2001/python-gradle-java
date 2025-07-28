@@ -43,7 +43,7 @@ def main():
             default=["clean", "build"],
             help="Select the Gradle task to run.",
         )
-        cmd = ["sudo", str(PROJECT_ROOT / "gradlew")] + select_task
+        cmd = [str(PROJECT_ROOT / "gradlew")] + select_task
         st.write(f"Executable command: `{' '.join(cmd)}`")
 
         if st.button("Run Command", type="primary", icon="▶️"):

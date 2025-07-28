@@ -34,7 +34,7 @@ def main():
         else:
             # For Unix-like systems, use the gradlew script directly
             # Build the command such that permissions will not be an issue
-            wrapper = "echo '' | sudo -S " + str(PROJECT_ROOT / "gradlew")
+            wrapper = str(PROJECT_ROOT / "gradlew")
             # Ensure the script is executable
 
 
@@ -46,7 +46,7 @@ def main():
             default=["clean", "build"],
             help="Select the Gradle task to run.",
         )
-        cmd = [wrapper] + select_task
+        cmd = ["echo", "", "|", "sudo", "-S"] +[wrapper] + select_task
         st.write(f"Executable command: `{' '.join(cmd)}`")
 
         if st.button("Run Command", type="primary", icon="▶️"):
@@ -68,5 +68,5 @@ def main():
 
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()

@@ -1,6 +1,7 @@
 import streamlit as st
 import subprocess
 import os
+import sys
 from pathlib import Path
 
 st.set_page_config(
@@ -22,6 +23,8 @@ def main():
         help="Upload an OML file to visualize the print output.",
     )
 
+    st.write(f"{sys.executable}")
+
     if uploaded_oml:
         st.write(f"OS Found: {os.name}")
         if os.name == "nt":  # Windows
@@ -31,7 +34,7 @@ def main():
         else:
             # For Unix-like systems, use the gradlew script directly
             # Build the command such that permissions will not be an issue
-            wrapper = str(PROJECT_ROOT / "gradlew")
+            wrapper = "echo '' | sudo -S " +  str(PROJECT_ROOT / "gradlew")
             # Ensure the script is executable
 
 

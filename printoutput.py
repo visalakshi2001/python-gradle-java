@@ -29,7 +29,12 @@ def main():
             # On Windows it’s often simpler to run under shell so the .bat is recognized
             shell_flag = True
         else:
-            wrapper = "./gradlew"
+            # For Unix-like systems, use the gradlew script directly
+            # Build the command such that permissions will not be an issue
+            wrapper = str(PROJECT_ROOT / "gradlew")
+            # Ensure the script is executable
+
+
             shell_flag = False
         
         select_task = st.multiselect(

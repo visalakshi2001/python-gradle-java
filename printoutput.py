@@ -48,7 +48,7 @@ def main():
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True,
-                shell=shell_flag
+                shell=True
             )
 
             st.write("Command Output:")

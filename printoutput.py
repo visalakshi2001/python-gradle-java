@@ -43,11 +43,6 @@ def main():
 
         if st.button("Run Command", type="primary", icon="▶️"):
             with st.spinner("Running command..."):
-                # Ensure the command is run in the project root directory
-                if os.name == "nt":
-                    cmd = " ".join(cmd)
-                else:
-                    cmd = " ".join([str(c) for c in cmd])
                 proc = subprocess.run(
                     cmd,
                     cwd=PROJECT_ROOT,
